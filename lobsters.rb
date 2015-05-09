@@ -31,7 +31,10 @@ module Lobsters
 
     def parse_page page
       begin
-        page.search(".details").map { |l| l.at("a").text }
+        { results: page.search(".details").map { |l| { title: l.at("a").text, 
+                                                       link:l.at("a").attributes['href'].value } 
+                                                     } 
+                                               }.to_json
       rescue 
         { error: "Page parsing error" }.to_json
       end
