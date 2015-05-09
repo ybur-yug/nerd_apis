@@ -14,8 +14,9 @@ Once deployed, we have 3 main routes:
 
 `recent`[GET], params: `page`     : This gets the most recent stories from the new section, 25 results. Defaults to `page = 1`
 
-`search` [POST], params: `terms`, `page`  : This takes JSON in the form of `"{\"terms\":\"python ruby\", \"page\":\"2\"}"`
- and returns the first 25 results.
+`search` [POST], params: `terms`, `page`, `what` (optional: args that can be used are `stories` and `all`  : 
+
+This takes JSON in the form of `"{\"terms\":\"python ruby\", \"page\":\"2\"}"` and returns the first 25 results.
 
 ## In the Wild
 It is hosted [here](https://quiet-temple-1623.herokuapp.com/) on Heroku.

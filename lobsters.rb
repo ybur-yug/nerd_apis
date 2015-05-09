@@ -34,17 +34,17 @@ module Lobsters
       end
     end
 
-    def search(query_string, page = nil)
-      if page
-        parse_page(@browser.get(get_query_url(query_string, page = page)))
+    def search(query_string, what, page)
+      if page != '1'
+        parse_page(@browser.get(get_query_url(query_string, what, page = page)))
       else
-        parse_page(@browser.get(get_query_url(query_string)))
+        parse_page(@browser.get(get_query_url(query_string, what)))
       end
     end
 
     private
 
-    def get_query_url(query_string, page = nil, what = 'all', order = 'relevence')
+    def get_query_url(query_string, what, page = nil, order = 'relevence')
       terms = query_string.gsub!(' ', '+')
       if page
         "https://www.lobste.rs/search/?q=#{terms}&what=#{what}&order=#{order}&page=#{page}?"
@@ -87,8 +87,8 @@ module Lobsters
       @scraper.recent(page)
     end
 
-    def search(query, page)
-      @scraper.search(query, page)
+    def search(query, page = 1, what='all')
+      @scraper.search(query, what, page)
     end
   end
 end
@@ -117,7 +117,12 @@ end
 post '/search' do
   begin
     data = JSON.parse(request.body.read)
-    api.search(data['terms'], data['page'])
+    require 'pry'; binding.pry
+    if data['what']
+      api.search(data['terms'], data['page'], data['what'])
+    else
+      api.search(data['terms'], data['page'])
+    end
   rescue
     status 400
     body 'invalid JSON format'
