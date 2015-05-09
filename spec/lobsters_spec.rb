@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe Lobsters::Api do
   let(:api) { Lobsters::Api.new }
   
