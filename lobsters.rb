@@ -2,12 +2,13 @@ require 'sinatra'
 require "json"
 require 'mechanize'
 
+# Base Module and Classes
 module Lobsters
   class Scraper
     attr_accessor :browser
     attr_accessor :lobsters_urls
     def initialize
-      @browser = Mechanize.new
+      @browser = Mechanize.new { |config| config.user_agent_alias = "Mac Safari" }
       @lobsters_urls = {
         frontpage: "http://lobste.rs",
         recent:    "http://lobste.rs/recent/",
@@ -64,6 +65,8 @@ module Lobsters
   end
 end
 
+
+# API Code
 api = Lobsters::Api.new
 
 set :server, 'webrick'
