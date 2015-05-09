@@ -37,7 +37,8 @@ module Lobsters
       begin
         { results: page.search(".details").map { |l| { title: l.at("a").text, 
                                                        link: l.at("a").attributes['href'].value,
-                                                       submitter: l.at(".byline").at('a').attributes['href'].value } 
+                                                       submitter: l.at(".byline").at('a').attributes['href'].value,
+                                                       submission_dt: l.at("label").attributes['title'].value } 
                                                      } 
                                                }.to_json
       rescue 
