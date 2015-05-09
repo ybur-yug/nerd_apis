@@ -14,7 +14,7 @@ Once deployed, we have 3 main routes:
 
 `recent`[GET], params: `page`     : This gets the most recent stories from the new section, 25 results. Defaults to `page = 1`
 
-`search` [POST], params: `terms`  : This takes JSON in the form of `"{\"terms\":\"python data science\"}"`
+`search` [POST], params: `terms`, `page`  : This takes JSON in the form of `"{\"terms\":\"python ruby\", \"page\":\"2\"}"`
  and returns the first 25 results.
 
 ## In the Wild
