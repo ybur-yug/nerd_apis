@@ -18,12 +18,20 @@ module Lobsters
       }
     end
 
-    def frontpage
-      parse_page(@browser.get(lobsters_urls[:frontpage]))
+    def frontpage(page)
+      if page != '1'
+        parse_page(@browser.get("#{lobsters_urls[:frontpage]}/page/#{page}"))
+      else
+        parse_page(@browser.get("#{lobsters_urls[:frontpage]}"))
+      end
     end
 
-    def recent
-      parse_page(@browser.get(lobsters_urls[:recent]))
+    def recent(page)
+      if page != '1'
+        parse_page(@browser.get("#{lobsters_urls[:recent]}/page/#{page}"))
+      else
+        parse_page(@browser.get("#{lobsters_urls[:recent]}"))
+      end
     end
 
     def search(query_string)
@@ -59,12 +67,16 @@ module Lobsters
       @scraper = Scraper.new
     end
 
-    def frontpage
-      @scraper.frontpage
+    def frontpage(page = 1)
+      if page 
+        @scraper.frontpage(page)
+      else
+        @scraper.frontpage
+      end
     end
 
-    def recent
-      @scraper.recent
+    def recent(page = 1)
+      @scraper.recent(page)
     end
 
     def search(query)
@@ -78,12 +90,20 @@ api = Lobsters::Api.new
 
 set :server, 'webrick'
 
-get '/recent' do
-  api.recent
-end
 
-get '/frontpage' do
-  api.frontpage
+get '/recent/:page' do
+  if params['page'] != '1'
+    api.recent(params['page'])
+  else 
+    api.recent
+  end
+end
+get '/frontpage/:page' do
+  if params['page'] != '1'
+    api.frontpage(params['page'])
+  else 
+    api.frontpage
+  end
 end
 
 post '/search' do
