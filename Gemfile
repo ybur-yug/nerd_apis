@@ -1,7 +1,11 @@
 source 'https://rubygems.org'
+
+group :test, :development do
+  gem 'rspec'
+  gem 'pry'
+end
+
 gem 'rack'
 gem 'mechanize'
-gem 'rspec'
-gem 'pry'
-gem 'rest_client'
 gem 'sinatra'
+
