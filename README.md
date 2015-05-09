@@ -25,7 +25,7 @@ It is hosted [here](https://quiet-temple-1623.herokuapp.com/) on Heroku.
 and here is an example of the search POST request:
 
 ```BASH
-devbox% curl -X POST  "https://quiet-temple-1623.herokuapp.com/search" -d "{\"terms\":\"python ruby\"}"
+devbox% curl -X POST  "https://quiet-temple-1623.herokuapp.com/search" -d "{\"terms\":\"python ruby\", \"page\":\"2\"}"
 {
     "results": [{
         "title": "Building A Ruby List Comprehension",
@@ -37,12 +37,6 @@ devbox% curl -X POST  "https://quiet-temple-1623.herokuapp.com/search" -d "{\"te
         "link": "http://patshaughnessy.net/2013/10/30/generational-gc-in-python-and-ruby",
         "submitter": "/u/jcs",
         "submission_dt": "2013-10-30 23:10:41 -0500"
-    }, {
-        "title": "Visualizing Garbage Collection in Ruby and Python",
-        "link": "http://patshaughnessy.net/2013/10/24/visualizing-garbage-collection-in-ruby-and-python",
-        "submitter": "/u/englishm",
-        "submission_dt": "2014-09-03 11:28:54 -0500"
-    }, 
     ... # omitted for brevity
     {
         "title": "Announcing Topaz: A New Ruby",
@@ -54,7 +48,6 @@ devbox% curl -X POST  "https://quiet-temple-1623.herokuapp.com/search" -d "{\"te
 ```
 ## Todos
 - Better response codes + routing/error handling
-- Allow pagination for recent, frontpage, and search
 - Utilize Mechanize's cookie jar to get the cookie that can filter displayed stories
 - Allow further customization of search
 - View comments
