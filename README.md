@@ -54,7 +54,7 @@ devbox% curl -X POST  "https://quiet-temple-1623.herokuapp.com/search" -d "{\"te
 ```
 ## Todos
 - Better response codes + routing/error handling
-- Allow pagination for recent, frontpage, and search
+- Allow pagination for search
 - Utilize Mechanize's cookie jar to get the cookie that can filter displayed stories
 - Allow further customization of search
 - View comments
