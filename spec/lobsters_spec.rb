@@ -1,3 +1,5 @@
+require './lobsters'
+
 describe Lobsters::Api do
   let(:api) { Lobsters::Api.new }
   
