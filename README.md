@@ -10,11 +10,11 @@ $ git push heroku master
 ```
 Once deployed, we have 3 main routes:
 
-`frontpage` [GET] : This provides the current frontpage, 25 results
+`frontpage` [GET], params: `page` : This provides the current frontpage, 25 results. Defaults to `page = 1`
 
-`recent`[GET]    : This gets the most recent stories from the new section, 25 results
+`recent`[GET], params: `page`     : This gets the most recent stories from the new section, 25 results. Defaults to `page = 1`
 
-`search` [POST], params: `terms` : This takes JSON in the form of `"{\"terms\":\"python data science\"}"`
+`search` [POST], params: `terms`  : This takes JSON in the form of `"{\"terms\":\"python data science\"}"`
  and returns the first 25 results.
 
 ## In the Wild
