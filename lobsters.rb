@@ -10,8 +10,8 @@ module Lobsters
       @browser = Mechanize.new
       @lobsters_urls = {
         frontpage: "http://lobste.rs",
-        recent:    "http://lobste.rb/recent/",
-        search:    "http://lobste.rb/search/"
+        recent:    "http://lobste.rs/recent/",
+        search:    "http://lobste.rs/search/"
       }
     end
 
@@ -20,6 +20,7 @@ module Lobsters
     end
 
     def recent 
+      require 'pry';binding.pry
       parse_page(@browser.get(lobsters_urls[:recent]))
     end
 
@@ -59,6 +60,8 @@ module Lobsters
 end
 
 api = Lobsters::Api.new
+
+set :server, 'webrick'
 
 get '/' do
   "hello world"
