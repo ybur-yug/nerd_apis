@@ -20,7 +20,6 @@ module Lobsters
     end
 
     def recent 
-      require 'pry';binding.pry
       parse_page(@browser.get(lobsters_urls[:recent]))
     end
 
