@@ -1,18 +1,20 @@
 require 'sinatra'
-require "json"
+require 'json'
 require 'mechanize'
 
 # Base Module and Classes
 module Lobsters
+  # A module to wrap/scrape Lobste.rs as a REST API
   class Scraper
+    # A Simple Scraper
     attr_accessor :browser
     attr_accessor :lobsters_urls
     def initialize
-      @browser = Mechanize.new { |config| config.user_agent_alias = "Mac Safari" }
+      @browser = Mechanize.new { |conf| conf.user_agent_alias = 'Mac Safari' }
       @lobsters_urls = {
-        frontpage: "http://lobste.rs",
-        recent:    "http://lobste.rs/recent/",
-        search:    "http://lobste.rs/search/"
+        frontpage: 'http://lobste.rs',
+        recent:    'http://lobste.rs/recent/',
+        search:    'http://lobste.rs/search/'
       }
     end
 
@@ -20,35 +22,39 @@ module Lobsters
       parse_page(@browser.get(lobsters_urls[:frontpage]))
     end
 
-    def recent 
+    def recent
       parse_page(@browser.get(lobsters_urls[:recent]))
     end
-    
-    def search query_string
+
+    def search(query_string)
       parse_page(@browser.get(get_query_url(query_string)))
     end
+
     private
-    def get_query_url query_string, what="all", order="relevence"
-      terms = query_string.gsub!(" ", "+") 
+
+    def get_query_url(query_string, what = 'all', order = 'relevence')
+      terms = query_string.gsub!(' ', '+')
       "https://www.lobste.rs/search/?q=#{terms}&what=#{what}&order=#{order}?"
     end
 
-    def parse_page page
+    def parse_page(page)
       begin
-        { results: page.search(".details").map { |l| { title: l.at("a").text, 
-                                                       link: l.at("a").attributes['href'].value,
-                                                       submitter: l.at(".byline").at('a').attributes['href'].value,
-                                                       submission_dt: l.at("label").attributes['title'].value } 
-                                                     } 
+        { results: page.search('.details').map { |l|
+                                                 { title: l.at('a').text,
+                                                   link: l.at('a').attributes['href'].value,
+                                                   submitter: l.at('.byline').at('a').attributes['href'].value,
+                                                   submission_dt: l.at('label').attributes['title'].value }
+                                                 }
                                                }.to_json
-      rescue 
-        { error: "Page parsing error" }.to_json
+      rescue
+        { error: 'Page parsing error' }.to_json
       end
     end
   end
 
+  # A simple API class to wrap lobste.rs
   class Api
-    attr_accessor :scraper 
+    attr_accessor :scraper
     def initialize
       @scraper = Scraper.new
     end
@@ -57,16 +63,15 @@ module Lobsters
       @scraper.frontpage
     end
 
-    def recent 
+    def recent
       @scraper.recent
     end
-    
-    def search query
+
+    def search(query)
       @scraper.search query
     end
   end
 end
-
 
 # API Code
 api = Lobsters::Api.new
@@ -82,12 +87,11 @@ get '/frontpage' do
 end
 
 post '/search' do
-  begin 
+  begin
     terms = JSON.parse(request.body.read)
-    api.search terms[terms.keys.first] # get first key if it doesnt match 'terms' anyway
+    api.search terms[terms.keys.first] # get the first key always
   rescue
     status 400
-    body "invalid JSON format"
+    body 'invalid JSON format'
   end
 end
-

@@ -1,6 +1,9 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    ast (2.0.0)
+    astrolabe (1.3.0)
+      parser (>= 2.2.0.pre.3, < 3.0)
     coderay (1.1.0)
     diff-lcs (1.2.5)
     domain_name (0.5.24)
@@ -24,6 +27,9 @@ GEM
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     ntlm-http (0.1.1)
+    parser (2.2.2.2)
+      ast (>= 1.1, < 3.0)
+    powerpack (0.1.1)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -31,6 +37,7 @@ GEM
     rack (1.6.1)
     rack-protection (1.5.3)
       rack
+    rainbow (2.0.0)
     rspec (3.2.0)
       rspec-core (~> 3.2.0)
       rspec-expectations (~> 3.2.0)
@@ -44,6 +51,13 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.2.0)
     rspec-support (3.2.2)
+    rubocop (0.31.0)
+      astrolabe (~> 1.3)
+      parser (>= 2.2.2.1, < 3.0)
+      powerpack (~> 0.1)
+      rainbow (>= 1.99.1, < 3.0)
+      ruby-progressbar (~> 1.4)
+    ruby-progressbar (1.7.5)
     sinatra (1.4.6)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -63,4 +77,5 @@ DEPENDENCIES
   pry
   rack
   rspec
+  rubocop
   sinatra
