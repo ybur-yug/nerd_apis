@@ -1,4 +1,6 @@
+require 'sinatra'
+
 get '/' do
-  "Welcome to the lobsters API"
+  "hello world"
 end
 
