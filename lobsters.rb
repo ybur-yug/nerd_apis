@@ -36,7 +36,8 @@ module Lobsters
     def parse_page page
       begin
         { results: page.search(".details").map { |l| { title: l.at("a").text, 
-                                                       link:l.at("a").attributes['href'].value } 
+                                                       link: l.at("a").attributes['href'].value,
+                                                       submitter: l.at(".byline").at('a').attributes['href'].value } 
                                                      } 
                                                }.to_json
       rescue 
