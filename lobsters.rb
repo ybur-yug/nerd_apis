@@ -22,11 +22,14 @@ module Lobsters
     def recent 
       parse_page(@browser.get(lobsters_urls[:recent]))
     end
-
+    
+    def search query_string
+      parse_page(@browser.get(get_query_url(query_string)))
+    end
     private
     def get_query_url query_string, what="all", order="relevence"
       terms = query_string.gsub!(" ", "+") 
-      query_url = "https://www.lobste.rs/search/?q=#{terms}&what=#{what}&order=#{order}?"
+      "https://www.lobste.rs/search/?q=#{terms}&what=#{what}&order=#{order}?"
     end
 
     def parse_page page
@@ -65,10 +68,6 @@ api = Lobsters::Api.new
 
 set :server, 'webrick'
 
-get '/' do
-  "hello world"
-end
-
 get '/recent' do
   api.recent
 end
@@ -77,4 +76,13 @@ get '/frontpage' do
   api.frontpage
 end
 
+post '/search' do
+  begin 
+    terms = JSON.parse(request.body.read)
+    api.search terms[terms.keys.first] # get first key if it doesnt match 'terms' anyway
+  rescue
+    status 400
+    body "invalid JSON format"
+  end
+end
 
