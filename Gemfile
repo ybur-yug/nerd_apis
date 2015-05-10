@@ -9,3 +9,4 @@ end
 gem 'rack'
 gem 'mechanize'
 gem 'sinatra'
+gem 'hobos'

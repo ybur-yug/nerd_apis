@@ -1,4 +1,3 @@
-require 'sinatra'
 require 'json'
 require 'mechanize'
 
@@ -34,17 +33,20 @@ module Lobsters
       end
     end
 
-    def search(query_string, what, page)
+    def search(query_string, what, page, order = 'relevence')
       if page != '1'
-        parse_page(@browser.get(get_query_url(query_string, what, page = page)))
+        parse_page(@browser.get(get_query_url(query_string, what, 
+                                              page = page,
+                                              relevence)))
       else
-        parse_page(@browser.get(get_query_url(query_string, what)))
+        parse_page(@browser.get(get_query_url(query_string, what, 
+                                              relevence)))
       end
     end
 
     private
 
-    def get_query_url(query_string, what, page = nil, order = 'relevence')
+    def get_query_url(query_string, what, page = nil, order)
       terms = query_string.gsub!(' ', '+')
       if page
         "https://www.lobste.rs/search/?q=#{terms}&what=#{what}&order=#{order}&page=#{page}?"
@@ -70,7 +72,9 @@ module Lobsters
 
   # A simple API class to wrap lobste.rs
   class Api
+    require 'hobos'
     attr_accessor :scraper
+
     def initialize
       @scraper = Scraper.new
     end
@@ -87,44 +91,9 @@ module Lobsters
       @scraper.recent(page)
     end
 
-    def search(query, page = 1, what='all')
-      @scraper.search(query, what, page)
+    def search(query, page = 1, what='all', order = 'relevence')
+      @scraper.search(query, what, page, order)
     end
   end
 end
 
-# API Code
-api = Lobsters::Api.new
-
-set :server, 'webrick'
-
-
-get '/recent/:page' do
-  if params['page'] != '1'
-    api.recent(params['page'])
-  else 
-    api.recent
-  end
-end
-get '/frontpage/:page' do
-  if params['page'] != '1'
-    api.frontpage(params['page'])
-  else 
-    api.frontpage
-  end
-end
-
-post '/search' do
-  begin
-    data = JSON.parse(request.body.read)
-    require 'pry'; binding.pry
-    if data['what']
-      api.search(data['terms'], data['page'], data['what'])
-    else
-      api.search(data['terms'], data['page'])
-    end
-  rescue
-    status 400
-    body 'invalid JSON format'
-  end
-end
