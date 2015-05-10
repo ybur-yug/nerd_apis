@@ -26,7 +26,7 @@ It is hosted [here](https://quiet-temple-1623.herokuapp.com/) on Heroku.
 Note that the `/` endpoint for random hobos and `/hobos` for a single hobo are only working locally at the moment.
 
 ## Sample
-[Here](https://gist.github.com/ybur-yug/a51436526691e5a044b5) are two gists with samples of `recent` and `frontpage`,
+[Here](https://gist.github.com/ybur-yug/a51436526691e5a044b5) are a few gists with samples of `recent` and `frontpage`,
 and here is an example of the search POST request:
 
 ```BASH
