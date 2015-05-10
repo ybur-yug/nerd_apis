@@ -1,5 +1,8 @@
 # Lobste.rs Unofficial API
 
+## Example Application
+You can find a Volt app hitting this api [here](https://github.com/ybur-yug/volt_task_example).
+
 ## Usage
 It is a simple Rack app. In order to run it, if you fancy Heroku one must simple do the following:
 
@@ -20,6 +23,7 @@ This takes JSON in the form of `"{\"terms\":\"python ruby\", \"page\":\"2\"}"` a
 
 ## In the Wild
 It is hosted [here](https://quiet-temple-1623.herokuapp.com/) on Heroku.
+Note that the `/` endpoint for random hobos and `/hobos` for a single hobo are only working locally at the moment.
 
 ## Sample
 [Here](https://gist.github.com/ybur-yug/a51436526691e5a044b5) are two gists with samples of `recent` and `frontpage`,
