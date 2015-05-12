@@ -20,7 +20,7 @@ end
 get '/recent/:page' do
   if params['page'] != '1'
     api.recent(params['page'])
-  else 
+  else
     api.recent
   end
 end
@@ -28,7 +28,7 @@ end
 get '/frontpage/:page' do
   if params['page'] != '1'
     api.frontpage(params['page'])
-  else 
+  else
     api.frontpage
   end
 end
@@ -46,4 +46,3 @@ post '/search' do
     body 'invalid JSON format'
   end
 end
-

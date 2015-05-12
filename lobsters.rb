@@ -22,8 +22,8 @@ module Lobsters
         parse_page(@browser.get("#{lobsters_urls[:frontpage]}/page/#{page}"))
       else
         parse_page(@browser.get("#{lobsters_urls[:frontpage]}"))
-      end 
-    end 
+      end
+    end
 
     def recent(page)
       if page != '1'
@@ -33,13 +33,12 @@ module Lobsters
       end
     end
 
-    def search(query_string, what, page, order = 'relevence')
+    def search(query_string, what, page, _order = 'relevence')
       if page != '1'
-        parse_page(@browser.get(get_query_url(query_string, what, 
-                                              page = page,
-                                              relevence)))
+        parse_page(@browser.get(get_query_url(query_string, what,
+                                              page, relevence)))
       else
-        parse_page(@browser.get(get_query_url(query_string, what, 
+        parse_page(@browser.get(get_query_url(query_string, what,
                                               relevence)))
       end
     end
@@ -49,7 +48,8 @@ module Lobsters
     def get_query_url(query_string, what, page = nil, order)
       terms = query_string.gsub!(' ', '+')
       if page
-        "https://www.lobste.rs/search/?q=#{terms}&what=#{what}&order=#{order}&page=#{page}?"
+        "https://www.lobste.rs/search/?q=#{terms}&what=#{what}&order=#{order}"
+        "&page=#{page}?"
       else
         "https://www.lobste.rs/search/?q=#{terms}&what=#{what}&order=#{order}?"
       end
@@ -57,13 +57,18 @@ module Lobsters
 
     def parse_page(page)
       begin
-        { results: page.search('.details').map { |l|
-                                                 { title: l.at('a').text,
-                                                   link: l.at('a').attributes['href'].value,
-                                                   submitter: l.at('.byline').at('a').attributes['href'].value,
-                                                   submission_dt: l.at('label').attributes['title'].value }
-                                                 }
-                                               }.to_json
+        { results: page.search('.details')
+                   .map { |l|
+                          { title: l.at('a').text,
+                            link: l.at('a')
+                                   .attributes['href'].value,
+                            submitter: l.at('.byline')
+                                        .at('a')
+                                        .attributes['href'].value,
+                            submission_dt: l.at('label')
+                                            .attributes['title'].value }
+                         }
+                       }.to_json
       rescue
         { error: 'Page parsing error' }.to_json
       end
@@ -80,7 +85,7 @@ module Lobsters
     end
 
     def frontpage(page = 1)
-      if page 
+      if page
         @scraper.frontpage(page)
       else
         @scraper.frontpage
@@ -91,9 +96,8 @@ module Lobsters
       @scraper.recent(page)
     end
 
-    def search(query, page = 1, what='all', order = 'relevence')
+    def search(query, page = 1, what = 'all', order = 'relevence')
       @scraper.search(query, what, page, order)
     end
   end
 end
-
