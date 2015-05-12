@@ -22,8 +22,8 @@ module Lobsters
         parse_page(@browser.get("#{lobsters_urls[:frontpage]}/page/#{page}"))
       else
         parse_page(@browser.get("#{lobsters_urls[:frontpage]}"))
-      end
-    end
+      end 
+    end 
 
     def recent(page)
       if page != '1'
