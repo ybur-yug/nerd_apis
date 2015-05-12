@@ -46,3 +46,15 @@ post '/search' do
     body 'invalid JSON format'
   end
 end
+
+post '/sign_in' do
+  begin
+    data = JSON.parse(request.body.read)
+    if data['email'] && data['password']
+      api.sign_in(data['email'], data['password'])
+    end
+  rescue
+    status 400
+    body 'invalid JSON format, please post with email and password values'
+  end
+end

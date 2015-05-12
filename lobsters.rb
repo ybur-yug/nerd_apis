@@ -43,6 +43,13 @@ module Lobsters
       end
     end
 
+    def sign_in(email, password)
+      page = @browser.get('https://lobste.rs/login')
+      page.form['email'] = email
+      page.form['password'] = password
+      parse_page(page.form.submit!)
+    end
+
     private
 
     def get_query_url(query_string, what, page = nil, order)
@@ -98,6 +105,11 @@ module Lobsters
 
     def search(query, page = 1, what = 'all', order = 'relevence')
       @scraper.search(query, what, page, order)
+    end
+
+    def sign_in(email, password)
+      # returns frontpage as signed in user, minimal to start
+      @scraper.sign_in(email, password)
     end
   end
 end
