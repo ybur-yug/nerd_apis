@@ -14,7 +14,7 @@ get '/' do
 end
 
 get '/hobo' do
-  { hobo: hobo_api.hobo }
+  { hobo: hobo_api.hobo.to_s }.to_json
 end
 
 get '/recent/:page' do
