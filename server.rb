@@ -26,11 +26,7 @@ get '/recent/:page' do
 end
 
 get '/frontpage/:page' do
-  if params['page'] != '1'
-    api.frontpage(params['page'])
-  else
-    api.frontpage
-  end
+  api.frontpage2(params['page'])
 end
 
 post '/search' do
