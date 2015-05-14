@@ -17,31 +17,32 @@ module Lobsters
       }
     end
 
-    def frontpage(page)
-      if page != '1'
-        parse_page(@browser.get("#{lobsters_urls[:frontpage]}/page/#{page}"))
-      else
-        parse_page(@browser.get("#{lobsters_urls[:frontpage]}"))
-      end
+    def frontpage2(page)
+      page ||= 1
+      parse_page(@browser.get("#{@lobsters_urls[:frontpage]}/page/#{page}"))
     end
 
-    def recent(page)
-      if page != '1'
-        parse_page(@browser.get("#{lobsters_urls[:recent]}/page/#{page}"))
-      else
-        parse_page(@browser.get("#{lobsters_urls[:recent]}"))
-      end
-    end
-
-    def search(query_string, what, page, _order = 'relevence')
-      if page != '1'
-        parse_page(@browser.get(get_query_url(query_string, what,
-                                              page, relevence)))
-      else
-        parse_page(@browser.get(get_query_url(query_string, what,
-                                              relevence)))
-      end
-    end
+#    def frontpage(page)
+#      parse_page(@browser.get("#{lobsters_urls[:frontpage]}/page/#{page}"))
+#    end
+#
+#    def recent(page)
+#      if page != '1'
+#        parse_page(@browser.get("#{lobsters_urls[:recent]}/page/#{page}"))
+#      else
+#        parse_page(@browser.get("#{lobsters_urls[:recent]}"))
+#      end
+#    end
+#
+#    def search(query_string, what, page, _order = 'relevence')
+#      if page != '1'
+#        parse_page(@browser.get(get_query_url(query_string, what,
+#                                              page, relevence)))
+#      else
+#        parse_page(@browser.get(get_query_url(query_string, what,
+#                                              relevence)))
+#      end
+#    end
 
     def sign_in(email, password)
       page = @browser.get('https://lobste.rs/login')
@@ -63,23 +64,51 @@ module Lobsters
     end
 
     def parse_page(page)
-      begin
-        { results: page.search('.details')
-                   .map { |l|
-                          { title: l.at('a').text,
-                            link: l.at('a')
-                                   .attributes['href'].value,
-                            submitter: l.at('.byline')
-                                        .at('a')
-                                        .attributes['href'].value,
-                            submission_dt: l.at('label')
-                                            .attributes['title'].value }
-                         }
-                       }.to_json
-      rescue
-        { error: 'Page parsing error' }.to_json
-      end
+      { results: page.search('.details')
+                 .map { |l| Entry.new(l) }
+                     }.to_json
+    rescue
+      { error: 'Page parsing error' }.to_json
     end
+  end
+
+  class Entry
+    def initialize(div)
+      @div = div 
+    end
+
+    def title
+      div.at('a').text
+    end
+
+    def link
+      div.at('a')
+         .attributes['href'].value
+    end
+
+    def submitter
+      div.at('.byline')
+         .at('a')
+         .attributes['href'].value
+    end
+
+    def submission_dt
+      div.at('label')
+         .attributes['title'].value
+    end
+
+    def to_json(*args)
+      {
+        title: title,
+        link: link,
+        submitter: submitter,
+        submission_dt: submission_dt
+      }.to_json
+    end
+
+    private
+
+    attr_reader :div
   end
 
   # A simple API class to wrap lobste.rs
@@ -91,13 +120,17 @@ module Lobsters
       @scraper = Scraper.new
     end
 
-    def frontpage(page = 1)
-      if page
-        @scraper.frontpage(page)
-      else
-        @scraper.frontpage
-      end
+    def frontpage2(page)
+      @scraper.frontpage2(page)
     end
+
+#    def frontpage(page = 1)
+#      if page
+#        @scraper.frontpage(page)
+#      else
+#        @scraper.frontpage
+#      end
+#    end
 
     def recent(page = 1)
       @scraper.recent(page)
