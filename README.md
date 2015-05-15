@@ -1,8 +1,9 @@
 # Unofficial Nerd APIs
 
-## Example Application
-You can find a [Volt](http://www.voltframework.com) app hitting this api in the `example_app` directory. The README inside
-contains a tutorial to make an application that can hit this API when you are hosting it locally, or deploy it.
+## In the Wild
+The example application in the `example_app` directory hits all 3 of these API's locally and displays the link.
+There is a tutorial on getting the basic functionality included in the README.
+![Volt Application](http://i.imgur.com/FwrPwKi.png)
 
 ## Structure
 #### lib/scraper.rb
@@ -36,9 +37,7 @@ $ heroku create
 $ git push heroku master
 ```
 
-## In the Wild
-A slightly older version is hosted [here](https://quiet-temple-1623.herokuapp.com/) on Heroku.
-Note that the `/` endpoint for random hobos and `/hobos` for a single hobo are only working locally at the moment.
+
 
 ## Todos
 - Better response codes + routing/error handling
