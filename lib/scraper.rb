@@ -7,7 +7,7 @@ URLS = {
     lobsters: { frontpage: 'http://lobste.rs/',
                 recent: 'http://lobste.rs/recent/',
                 search: 'http://lobste.rs/search/' }
-  }
+}
 
 module Scraper
   class Lobsters

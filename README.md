@@ -3,6 +3,20 @@
 ## Example Application
 You can find a Volt app hitting this api [here](https://github.com/ybur-yug/volt_task_example).
 
+## Structure
+#### scraper.rb
+This is intended to incapsulate the scraper for each site being API-ified (for now, only lobste.rs but in the future reddit)
+
+#### apis.rb
+The module containing each individual API. The goal of this module/its classes is to have a minimal LOC setup for the APIs made.
+
+#### stories.rb
+This wraps the JSON that we hope to return in a Rubyish OO manner for maximum separation from the business logic of the
+scraping operations performed
+
+#### server.rb
+This contains the server itself, a simple sinatra/rack application
+
 ## Usage
 It is a simple Rack app. In order to run it, if you fancy Heroku one must simple do the following:
 
@@ -13,17 +27,12 @@ $ git push heroku master
 ```
 Once deployed, we have 3 main routes:
 
-`frontpage` [GET], params: `page` : This provides the current frontpage, 25 results. Defaults to `page = 1`
-
-`recent`[GET], params: `page`     : This gets the most recent stories from the new section, 25 results. Defaults to `page = 1`
-
-`search` [POST], params: `terms`, `page`, `what` (optional: args that can be used are `stories` and `all`  : 
-
-This takes JSON in the form of `"{\"terms\":\"python ruby\", \"page\":\"2\"}"` and returns the first 25 results.
+`frontpage` [GET], params: `page` : This provides the current frontpage, 25 results.
 
 ## In the Wild
 It is hosted [here](https://quiet-temple-1623.herokuapp.com/) on Heroku.
 Note that the `/` endpoint for random hobos and `/hobos` for a single hobo are only working locally at the moment.
+It is also not updated to the latest commits.
 
 ## Sample
 [Here](https://gist.github.com/ybur-yug/a51436526691e5a044b5) are a few gists with samples of `recent` and `frontpage`,
@@ -54,10 +63,8 @@ devbox% curl -X POST  "https://quiet-temple-1623.herokuapp.com/search" -d "{\"te
 ## Todos
 - Better response codes + routing/error handling
 - Utilize Mechanize's cookie jar to get the cookie that can filter displayed stories
-- Allow further customization of search
 - View comments
 - Allow user login and profile updating
-- Allow invitations of other users once logged in
 - Mock tests with VCR or webmock (simpler alternative)
 - (and much more)
 
