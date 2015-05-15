@@ -40,9 +40,6 @@ $ git push heroku master
 A slightly older version is hosted [here](https://quiet-temple-1623.herokuapp.com/) on Heroku.
 Note that the `/` endpoint for random hobos and `/hobos` for a single hobo are only working locally at the moment.
 
-## Sample
-[Here](https://gist.github.com/ybur-yug/a51436526691e5a044b5) are a few gists with samples of `recent` and `frontpage`.
-
 ## Todos
 - Better response codes + routing/error handling
 - Utilize Mechanize's cookie jar to get the cookie that can filter displayed stories
