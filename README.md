@@ -1,7 +1,7 @@
-# Lobste.rs Unofficial API
+# Lobste.rs Unofficial API 
 
 ## Example Application
-You can find a Volt app hitting this api [here](https://github.com/ybur-yug/volt_task_example).
+You can find a [Volt](http://www.voltframework.com) app hitting this api [here](https://github.com/ybur-yug/volt_task_example).
 
 ## Structure
 #### lib/scraper.rb
@@ -17,6 +17,10 @@ scraping operations performed
 #### server.rb
 This contains the server itself, a simple sinatra/rack application
 
+## Routes
+`/frontpage/:page` GET
+`/recent/:page` GET
+
 ## Usage
 It is a simple Rack app. In order to run it, if you fancy Heroku one must simple do the following:
 
@@ -25,11 +29,6 @@ $ bundle install
 $ heroku create
 $ git push heroku master
 ```
-Once deployed, we have 2 main routes:
-
-`frontpage` [GET], params: `page` : This provides the current frontpage, 25 results.
-
-`recent` [GET], params: `page` : This provides the provided page of recent, 25 results.
 
 ## In the Wild
 A slightly older version is hosted [here](https://quiet-temple-1623.herokuapp.com/) on Heroku.
