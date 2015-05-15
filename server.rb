@@ -2,9 +2,9 @@ require 'sinatra'
 require 'json'
 require 'hobos'
 
-require_relative 'lobsters'
+require_relative 'apis'
 
-api = Lobsters::Api.new
+api = Apis::LobstersApi.new
 hobo_api = Hobos::Api.new
 
 set :server, 'webrick'
@@ -17,40 +17,6 @@ get '/hobo' do
   { hobo: hobo_api.hobo.to_s }.to_json
 end
 
-get '/recent/:page' do
-  if params['page'] != '1'
-    api.recent(params['page'])
-  else
-    api.recent
-  end
-end
-
 get '/frontpage/:page' do
-  api.frontpage2(params['page'])
-end
-
-post '/search' do
-  begin
-    data = JSON.parse(request.body.read)
-    if data['what'] || data['relevence']
-      api.search(data['terms'], data['page'], data['what'])
-    else
-      api.search(data['terms'], data['page'])
-    end
-  rescue
-    status 400
-    body 'invalid JSON format'
-  end
-end
-
-post '/sign_in' do
-  begin
-    data = JSON.parse(request.body.read)
-    if data['email'] && data['password']
-      api.sign_in(data['email'], data['password'])
-    end
-  rescue
-    status 400
-    body 'invalid JSON format, please post with email and password values'
-  end
+  api.frontpage(params['page'])
 end
