@@ -6,24 +6,24 @@
     <h1>Lobsters</h1>
 
     {{ page._lobsters._results.each do |story| }}
-      <h4><a href='{{ story._link }}'>
-      {{ story._title }}</a></h4>
+      <h6><a href='{{ story._link }}'>
+      {{ story._title }}</a></h6>
     {{ end }}
   </div>
 
   <div class='col-md-4'>
     <h1>Proggit</h1>
     {{ page._proggit._results.each do |story| }}
-      <h4><a href='{{ story._link }}'>
-      {{ story._title }}</a></h4>
+      <h6><a href='{{ story._link }}'>
+      {{ story._title }}</a></h6>
     {{ end }}
   </div>
 
   <div class='col-md-4'>
     <h1>Data Tau</h1>
     {{ page._datatau._results.each do |story| }}
-      <h4><a href='{{ story._link }}'>
-      {{ story._title }}</a></h4>
+      <h6><a href='{{ story._link }}'>
+      {{ story._title }}</a></h6>
     {{ end }}
   </div>
 
