@@ -30,11 +30,12 @@ This contains the server itself, a simple sinatra/rack application
 ## Routes
 `/lobsters/frontpage/:page` GET
 
-`lobsters/recent/:page` GET
+`/lobsters/recent/:page` GET
 
-`/reddit` GET
+`/proggit` GET
 
 `/datatau` GET
+
 
 ## Usage
 It is a simple Rack app. In order to run it, if you fancy Heroku one must simple do the following:
