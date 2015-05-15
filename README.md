@@ -3,6 +3,13 @@
 ## In the Wild
 The example application in the `example_app` directory hits all 3 of these API's locally and displays the link.
 There is a tutorial on getting the basic functionality included in the README.
+In order to just get it to run, do the following:
+
+`bundle`
+`bundle exec volt s`
+
+And navigate to `localhost:3000`
+
 ![Volt Application](http://i.imgur.com/FwrPwKi.png)
 
 ## Structure
