@@ -6,6 +6,7 @@ There is a tutorial on getting the basic functionality included in the README.
 In order to just get it to run, do the following:
 
 `bundle`
+
 `bundle exec volt s`
 
 And navigate to `localhost:3000`
