@@ -1,4 +1,4 @@
-# Lobste.rs Unofficial API 
+# Unofficial Nerd APIs
 
 ## Example Application
 You can find a [Volt](http://www.voltframework.com) app hitting this api in the `example_app` directory. The README inside
@@ -6,7 +6,7 @@ contains a tutorial to make an application that can hit this API when you are ho
 
 ## Structure
 #### lib/scraper.rb
-This is intended to incapsulate the scraper for each site being API-ified (for now, only lobste.rs but in the future reddit)
+This is intended to incapsulate the scraper for each site being API-ified
 
 #### lib/apis.rb
 The module containing each individual API. The goal of this module/its classes is to have a minimal LOC setup for the APIs made.
@@ -19,9 +19,13 @@ scraping operations performed
 This contains the server itself, a simple sinatra/rack application
 
 ## Routes
-`/frontpage/:page` GET
+`/lobsters/frontpage/:page` GET
 
-`/recent/:page` GET
+`lobsters/recent/:page` GET
+
+`/reddit` GET
+
+`/datatau` GET
 
 ## Usage
 It is a simple Rack app. In order to run it, if you fancy Heroku one must simple do the following:
@@ -35,9 +39,6 @@ $ git push heroku master
 ## In the Wild
 A slightly older version is hosted [here](https://quiet-temple-1623.herokuapp.com/) on Heroku.
 Note that the `/` endpoint for random hobos and `/hobos` for a single hobo are only working locally at the moment.
-
-## Sample
-[Here](https://gist.github.com/ybur-yug/a51436526691e5a044b5) are a few gists with samples of `recent` and `frontpage`.
 
 ## Todos
 - Better response codes + routing/error handling
