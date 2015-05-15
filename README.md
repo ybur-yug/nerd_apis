@@ -19,6 +19,7 @@ This contains the server itself, a simple sinatra/rack application
 
 ## Routes
 `/frontpage/:page` GET
+
 `/recent/:page` GET
 
 ## Usage
