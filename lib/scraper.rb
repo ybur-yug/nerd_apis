@@ -22,11 +22,11 @@ module Scraper
     end
 
     def recent(page)
-      thing = parse_page(@browser.get("#{URLS[:lobsters][:recent]}page/#{page}"))
+      parse_page(@browser.get("#{URLS[:lobsters][:recent]}page/#{page}"))
     end
     
     def parse_page(page)
-      res = { results: page.search('.details')
+      { results: page.search('.details')
                  .map { |link| Stories::LobstersStory.new(link) }
       }.to_json
     rescue
