@@ -14,7 +14,7 @@ The module containing each individual API. The goal of this module/its classes i
 This wraps the JSON that we hope to return in a Rubyish OO manner for maximum separation from the business logic of the
 scraping operations performed
 
-#### lib/server.rb
+#### server.rb
 This contains the server itself, a simple sinatra/rack application
 
 ## Usage
