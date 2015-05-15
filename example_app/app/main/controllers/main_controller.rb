@@ -4,16 +4,21 @@ module Main
     def index
       LobsterTask.lobsters
       .then do |stories|
-        puts stories
-        page._stories = stories
+        page._lobsters = stories
       end.fail do |error|
         page._stories = error
       end
-      StatTask.show_stats
-      .then do |stats|
-        page._info = stats
+      ProggitTask.proggit
+      .then do |stories|
+        page._proggit = stories 
       end.fail do |error|
-        page._info = error
+        page._proggit_error = error
+      end
+      DatatauTask.datatau
+      .then do |stories|
+        page._datatau = stories
+      end.fail do |error|
+        page._dt_error = error
       end
     end
 

@@ -27,7 +27,7 @@ get 'lobsters/recent/:page' do
   lobsters_api.recent(params['page'])
 end
 
-get '/reddit' do
+get '/proggit' do
   proggit_api.frontpage
 end
 

@@ -2,18 +2,29 @@
   Home
 
 <:Body>
-  <h1>Lobsters</h1>
+  <div class='col-md-4'>
+    <h1>Lobsters</h1>
 
-  {{ page._stories._results.each do |story| }}
-    <h4><a href='{{ story._link }}'>
-    {{ story._title }}</a></h4>
-  {{ end }}
-  <h2>Ruby Version</h2>
-    <h4>{{ page._info._ruby_version }}</h4>
+    {{ page._lobsters._results.each do |story| }}
+      <h4><a href='{{ story._link }}'>
+      {{ story._title }}</a></h4>
+    {{ end }}
+  </div>
 
-  <h2>Ruby Platform</h2>
-    <h4>{{ page._info._ruby_platform }}</h4>
+  <div class='col-md-4'>
+    <h1>Proggit</h1>
+    {{ page._proggit._results.each do |story| }}
+      <h4><a href='{{ story._link }}'>
+      {{ story._title }}</a></h4>
+    {{ end }}
+  </div>
 
-  <h2>Ruby Description</h2>
-    <h4>{{ page._info._ruby_description }}</h4>
+  <div class='col-md-4'>
+    <h1>Data Tau</h1>
+    {{ page._datatau._results.each do |story| }}
+      <h4><a href='{{ story._link }}'>
+      {{ story._title }}</a></h4>
+    {{ end }}
+  </div>
 
+  
