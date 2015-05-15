@@ -70,4 +70,29 @@ module Stories
 
     attr_reader :div
   end
+
+  class DataTauStory
+    def initialize(div)
+      @div = div
+    end
+
+    def title 
+      div.text
+    end
+
+    def link
+      div.attributes['href']
+    end
+
+    def to_json(*args)
+      {
+        title: title,
+        link: link
+      }.to_json
+    end
+
+    private
+
+    attr_reader :div
+  end
 end

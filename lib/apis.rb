@@ -28,4 +28,14 @@ module Apis
       @scraper.recent(page)
     end
   end
+
+  class DataTau
+    def initialize
+      @scraper = Scraper::DataTau.new
+    end
+
+    def frontpage
+      @scraper.frontpage
+    end
+  end
 end

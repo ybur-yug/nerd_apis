@@ -5,6 +5,7 @@ require 'hobos'
 require_relative './lib/apis'
 
 lobsters_api = Apis::Lobsters.new
+datatau_api  = Apis::DataTau.new
 proggit_api  = Apis::Proggit.new
 hobo_api     = Hobos::Api.new
 
@@ -28,4 +29,8 @@ end
 
 get '/reddit' do
   proggit_api.frontpage
+end
+
+get '/datatau' do
+  datatau_api.frontpage
 end
