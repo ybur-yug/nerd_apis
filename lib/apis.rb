@@ -3,9 +3,17 @@ require 'json'
 require_relative 'scraper'
 
 module Apis
-  class Lobsters
-    attr_accessor :scraper
+  class Proggit
+    def initialize 
+      @scraper = Scraper::Proggit.new
+    end
 
+    def frontpage
+      @scraper.frontpage
+    end
+  end
+
+  class Lobsters
     def initialize
       @scraper = Scraper::Lobsters.new
     end

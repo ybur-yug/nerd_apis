@@ -1,8 +1,35 @@
 module Stories
-  class RedditStory
-    def initialize(div)
-      @div
+  class ProggitStory
+    def initialize(link)
+      @div = link
     end
+
+    def title
+      div.attributes.text
+    end
+
+    def link
+      div.uri.to_s
+    end
+
+    def submitter
+      ""
+    end
+
+    def submission_dt
+      ""
+    end
+
+    def to_json(*args)
+      {
+        title: title,
+        link: link,
+      }.to_json
+    end
+
+    private
+
+    attr_reader :div
   end
 
   class LobstersStory 

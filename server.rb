@@ -4,8 +4,9 @@ require 'hobos'
 
 require_relative './lib/apis'
 
-api = Apis::Lobsters.new
-hobo_api = Hobos::Api.new
+lobsters_api = Apis::Lobsters.new
+proggit_api  = Apis::Proggit.new
+hobo_api     = Hobos::Api.new
 
 set :server, 'webrick'
 
@@ -17,10 +18,14 @@ get '/hobo' do
   { hobo: hobo_api.hobo.to_s }.to_json
 end
 
-get '/frontpage/:page' do
-  api.frontpage(params['page'])
+get '/lobsters/frontpage/:page' do
+  lobsters_api.frontpage(params['page'])
 end
 
-get '/recent/:page' do
-  api.recent(params['page'])
+get 'lobsters/recent/:page' do
+  lobsters_api.recent(params['page'])
+end
+
+get '/reddit' do
+  proggit_api.frontpage
 end

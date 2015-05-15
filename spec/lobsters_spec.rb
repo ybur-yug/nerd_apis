@@ -13,3 +13,12 @@ describe Apis::Lobsters do
     expect(resp.count).to eq 25
   end
 end
+
+describe Apis::Proggit do
+  let(:proggit_api) { Apis::Proggit.new }
+
+  it 'can get the frontpage' do
+    resp = JSON.parse(proggit_api.frontpage(1))['results']
+    expect(resp.count).to eq 25
+  end
+end
