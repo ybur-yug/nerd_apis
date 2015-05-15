@@ -1,7 +1,7 @@
 # Lobste.rs Unofficial API 
 
 ## Example Application
-You can find a [Volt](http://www.voltframework.com) app hitting this api in the `example` directory. The README inside
+You can find a [Volt](http://www.voltframework.com) app hitting this api in the `example_app` directory. The README inside
 contains a tutorial to make an application that can hit this API when you are hosting it locally, or deploy it.
 
 ## Structure
