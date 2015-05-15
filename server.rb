@@ -2,7 +2,7 @@ require 'sinatra'
 require 'json'
 require 'hobos'
 
-require_relative 'apis'
+require_relative './lib/apis'
 
 api = Apis::LobstersApi.new
 hobo_api = Hobos::Api.new
