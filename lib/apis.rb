@@ -1,10 +1,9 @@
 require 'json'
-require 'mechanize'
 
 require_relative 'scraper'
 
 module Apis
-  class LobstersApi
+  class Lobsters
     attr_accessor :scraper
 
     def initialize
@@ -12,7 +11,13 @@ module Apis
     end
 
     def frontpage(page)
+      page ||= 1
       @scraper.frontpage(page)
+    end
+
+    def recent(page)
+      page ||= 1
+      @scraper.recent(page)
     end
   end
 end

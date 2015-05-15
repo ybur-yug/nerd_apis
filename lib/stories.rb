@@ -1,5 +1,8 @@
 module Stories
   class RedditStory
+    def initialize(div)
+      @div
+    end
   end
 
   class LobstersStory 

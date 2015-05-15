@@ -18,8 +18,11 @@ module Scraper
     end
 
     def frontpage(page)
-      page ||= 1
       parse_page(@browser.get("#{URLS[:lobsters][:frontpage]}page/#{page}"))
+    end
+
+    def recent(page)
+      thing = parse_page(@browser.get("#{URLS[:lobsters][:recent]}page/#{page}"))
     end
     
     def parse_page(page)

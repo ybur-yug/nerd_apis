@@ -4,7 +4,7 @@ require 'hobos'
 
 require_relative './lib/apis'
 
-api = Apis::LobstersApi.new
+api = Apis::Lobsters.new
 hobo_api = Hobos::Api.new
 
 set :server, 'webrick'
@@ -19,4 +19,8 @@ end
 
 get '/frontpage/:page' do
   api.frontpage(params['page'])
+end
+
+get '/recent/:page' do
+  api.recent(params['page'])
 end
