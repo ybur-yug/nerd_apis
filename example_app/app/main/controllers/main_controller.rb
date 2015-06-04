@@ -10,9 +10,15 @@ module Main
       end
       ProggitTask.proggit
       .then do |stories|
-        page._proggit = stories 
+        page._proggit = stories
       end.fail do |error|
         page._proggit_error = error
+      end
+      RedditTask.reddit
+      .then do |stories|
+        page._reddit = stories
+      end.fail do |error|
+        page._reddit_error = error
       end
       DatatauTask.datatau
       .then do |stories|

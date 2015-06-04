@@ -4,7 +4,7 @@ require_relative 'scraper'
 
 module Apis
   class Proggit
-    def initialize 
+    def initialize
       @scraper = Scraper::Proggit.new
     end
 
@@ -12,6 +12,17 @@ module Apis
       @scraper.frontpage
     end
   end
+
+  class Reddit
+    def initialize
+      @scraper = Scraper::Reddit.new
+    end
+
+    def frontpage
+      @scraper.frontpage
+    end
+  end
+
 
   class Lobsters
     def initialize

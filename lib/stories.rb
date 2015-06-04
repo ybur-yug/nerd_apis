@@ -1,5 +1,5 @@
 module Stories
-  class ProggitStory
+  class RedditStory
     def initialize(link)
       @div = link
     end
@@ -32,9 +32,9 @@ module Stories
     attr_reader :div
   end
 
-  class LobstersStory 
+  class LobstersStory
     def initialize(div)
-      @div = div 
+      @div = div
     end
 
     def title
@@ -76,7 +76,7 @@ module Stories
       @div = div
     end
 
-    def title 
+    def title
       div.text
     end
 

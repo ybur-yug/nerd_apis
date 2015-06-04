@@ -31,10 +31,10 @@ end
 get '/proggit' do
   proggit_api.frontpage
 end
+
 get '/reddit' do
   reddit_api.frontpage
 end
-
 
 get '/datatau' do
   datatau_api.frontpage

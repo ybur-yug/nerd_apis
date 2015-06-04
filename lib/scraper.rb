@@ -1,10 +1,11 @@
 require 'mechanize'
 
 require_relative 'stories'
-  
-URLS = { 
+
+URLS = {
     proggit:  { frontpage: 'http://programming.reddit.com/' },
-    datatau:  { frontpage: 'http://www.datatau.com' },
+    reddit:   { frontpage: 'http://reddit.com/'},
+    datatau:  { frontpage: 'http://www.datatau.com/' },
     lobsters: { frontpage: 'http://lobste.rs/',
                 recent: 'http://lobste.rs/recent/',
                 search: 'http://lobste.rs/search/' }
@@ -27,7 +28,7 @@ module Scraper
     def recent(page)
       parse_page(@browser.get("#{@urls[:recent]}page/#{page}"))
     end
-    
+
     def parse_page(page)
       { results: page.search('.details')
                  .map { |link| Stories::LobstersStory.new(link) }
@@ -52,9 +53,29 @@ module Scraper
     end
 
     def parse_page(links)
-      { results: links.map { |link| Stories::ProggitStory.new(link) } }.to_json
+      { results: links.map { |link| Stories::RedditStory.new(link) } }.to_json
     end
   end
+
+  class Reddit
+    def initialize
+      @urls = URLS[:reddit]
+      @browser = Mechanize.new
+    end
+
+    def frontpage
+      frontpage = @browser.get(@urls[:frontpage])
+      links = frontpage.links.map { |link|
+        link if link.dom_class == 'title may-blank '
+      }.compact!
+      parse_page(links)
+    end
+
+    def parse_page(links)
+      { results: links.map { |link| Stories::RedditStory.new(link) } }.to_json
+    end
+  end
+
 
   class DataTau
     def initialize
