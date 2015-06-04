@@ -11,7 +11,7 @@ In order to just get it to run, do the following:
 
 And navigate to `localhost:3000`
 
-![Volt Application](http://i.imgur.com/FwrPwKi.png)
+![Volt Application](http://i.imgur.com/2yqQuTC.png)
 
 ## Structure
 #### lib/scraper.rb
@@ -36,14 +36,22 @@ This contains the server itself, a simple sinatra/rack application
 
 `/datatau` GET
 
+`/reddit` GET
+
 
 ## Usage
-It is a simple Rack app. In order to run it, if you fancy Heroku one must simple do the following:
 
 ```BASH
-$ bundle install
-$ heroku create
-$ git push heroku master
+$ bundle install #in route directory
+$ cd example_app
+$ bundle
+```
+
+Now that you have bundle installed both applications, start the sinatra server and the volt server:
+```BASH
+$ bundle exec ruby server.rb
+$ cd example_app
+$ bundle exec volt s
 ```
 
 
