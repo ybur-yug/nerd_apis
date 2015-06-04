@@ -14,6 +14,7 @@ URLS = {
 module Scraper
   class Lobsters
     attr_accessor :browser
+
     def initialize
       @urls = URLS[:lobsters]
       @browser = Mechanize.new

@@ -11,6 +11,14 @@
     {{ end }}
   </div>
 
+  <div class='col-md-3'>
+    <h1>Reddit</h1>
+    {{ page._lobsters._results.each do |story| }}
+      <h6><a href='{{ story._link }}'>
+      {{ story._title }}</a></h6>
+    {{ end }}
+  </div>
+
   <div class='col-md-4'>
     <h1>Proggit</h1>
     {{ page._proggit._results.each do |story| }}

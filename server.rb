@@ -7,6 +7,7 @@ require_relative './lib/apis'
 lobsters_api = Apis::Lobsters.new
 datatau_api  = Apis::DataTau.new
 proggit_api  = Apis::Proggit.new
+reddit_api = Apis::Reddit.new
 hobo_api     = Hobos::Api.new
 
 set :server, 'webrick'
@@ -30,6 +31,10 @@ end
 get '/proggit' do
   proggit_api.frontpage
 end
+get '/reddit' do
+  reddit_api.frontpage
+end
+
 
 get '/datatau' do
   datatau_api.frontpage
